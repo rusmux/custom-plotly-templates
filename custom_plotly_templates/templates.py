@@ -43,5 +43,5 @@ def set_custom_template(template: str) -> None:
     if template == "custom_white":
         pio.templates.default = "plotly_white+custom_white"
     else:
-        raise ValueError(f"\"{template}\" is not a valid template."
-                         f"Template must be one of: \"custom_white\".")
+        raise ValueError(f"\"{template}\" is not a valid template. "
+                         f"Template must be one of: [\"custom_white\"]")
