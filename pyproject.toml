@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "custom-plotly-templates"
+version = "0.1.0"
+description = "Custom templates and configurations for Plotly"
+
+license = "MIT"
+
+authors = [
+    "Ruslan Mukhametshin <rusmux21@gmail.com>"
+]
+
+homepage = "https://github.com/rusmux/custom-plotly-templates"
+
+keywords = ["plotly", "template", "config"]
+
+readme = "README.md"
+packages = [{include = "custom_plotly_templates"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+plotly = "^5.10.0"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.10.0"
+isort = "^5.10.1"
+pylint = "^2.15.5"
+notebook = "^6.5.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
