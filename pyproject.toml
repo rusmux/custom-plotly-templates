@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "custom-plotly-templates"
-version = "0.1.0"
+version = "0.1.1"
 description = "Custom templates and configurations for Plotly"
 
 license = "MIT"
