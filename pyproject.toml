@@ -17,15 +17,23 @@ readme = "README.md"
 packages = [{include = "custom_plotly_templates"}]
 
 [tool.poetry.dependencies]
-python = ">=3.8"
+python = ">=3.8, <3.11"
 plotly = ">=5.8.0"
 
-
 [tool.poetry.group.dev.dependencies]
-black = "^22.10.0"
-isort = "^5.10.1"
-pylint = "^2.15.5"
 notebook = "^6.5.1"
+wemake-python-styleguide = "^0.17.0"
+
+[tool.black]
+# for pre-commit hooks
+line-length = 120
+target-version = ["py38", "py39", "py310"]
+
+[tool.isort]
+# for pre-commit hooks
+profile = 'black'
+line_length = 120
+multi_line_output = 3
 
 [build-system]
 requires = ["poetry-core"]
