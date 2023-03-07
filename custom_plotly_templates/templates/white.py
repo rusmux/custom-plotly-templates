@@ -1,9 +1,8 @@
-"""Custom templates for Plotly."""
-
 import plotly.graph_objects as go
 import plotly.io as pio
 
-custom_white = go.layout.Template(
+WHITE_TEMPLATE = pio.templates["plotly_white"]
+WHITE_TEMPLATE.update(
     dict(
         data=dict(
             histogram=[go.Histogram(histnorm="probability")],
@@ -35,12 +34,3 @@ custom_white = go.layout.Template(
         ),
     )
 )
-
-pio.templates["custom_white"] = custom_white
-
-
-def set_custom_template(template: str) -> None:
-    if template == "custom_white":
-        pio.templates.default = "plotly_white+custom_white"
-    else:
-        raise ValueError(f'"{template}" is not a valid template. ' f'Template must be one of: ["custom_white"]')
