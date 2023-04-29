@@ -1,18 +1,6 @@
-from typing import Dict
-
-import plotly.graph_objects as go
 import plotly.io as pio
 
-from custom_plotly_templates.templates.white import WHITE_TEMPLATE
-
-
-def register_custom_templates() -> Dict[str, go.layout.Template]:
-    templates = {}
-    for name, item in globals().items():  # noqa: WPS110, WPS421
-        if isinstance(item, go.layout.Template):
-            pio.templates[name.lower()] = item
-            templates[name.lower()] = item
-    return templates
+from custom_plotly_templates.templates.white import CUSTOM_WHITE
 
 
 def set_template(template: str) -> None:
@@ -24,6 +12,4 @@ def set_template(template: str) -> None:
     pio.templates.default = template
 
 
-TEMPLATES = register_custom_templates()
-
-__all__ = ["set_template", *TEMPLATES.keys()]
+__all__ = ["set_template", "CUSTOM_WHITE"]  # noqa: WPS410
