@@ -6,23 +6,32 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
       - id: pretty-format-json
-
       - id: check-yaml
       - id: check-toml
       - id: check-docstring-first
       - id: check-case-conflict
       - id: check-added-large-files
-        args: [ '--maxkb=5120' ]
+        args: [ "--maxkb=5120" ]
+
+      - id: detect-aws-credentials
+        args: [ "--allow-missing-credentials" ]
+      - id: detect-private-key
+
+  - repo: https://github.com/hadolint/hadolint
+    rev: v2.12.1-beta
+    hooks:
+      - id: hadolint
+        args: [ "--failure-threshold=error" ]
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.3.1
+    rev: v3.3.2
     hooks:
       - id: pyupgrade
         name: Upgrade code
         args: [ --py38-plus ]
 
   - repo: https://github.com/psf/black
-    rev: 23.1.0
+    rev: 23.3.0
     hooks:
       - id: black
 
@@ -42,10 +51,9 @@ repos:
 
   - repo: local
     hooks:
-
       - id: update-requirements
         name: Update requirements
-        entry: poetry export -f requirements.txt -o requirements.txt --with=dev --without-hashes
+        entry: make create_requirements
         language: system
         files: pyproject.toml|poetry.lock
         pass_filenames: false
@@ -61,6 +69,22 @@ repos:
         entry: flake8
         language: system
         types: [ python ]
+
+      - id: mypy
+        name: Type checking
+        entry: mypy --install-types --non-interactive custom_plotly_templates tests
+        args: ["--scripts-are-modules"]
+        pass_filenames: false
+        language: system
+        types: [ python ]
+
+      - id: pytest
+        name: Run tests
+        entry: pytest
+        pass_filenames: false
+        language: system
+        types: [ python ]
+        stages: [ push ]
 
       - id: clean
         name: Remove unused files

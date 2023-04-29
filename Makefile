@@ -44,23 +44,29 @@ endif
 
 ## Create requirements.txt files from pyproject.toml
 create_requirements:
-	poetry export -f requirements.txt -o requirements.txt --with dev --without-hashes
+	poetry export -f requirements.txt -o requirements.txt --without-hashes
+	poetry export -f requirements.txt -o requirements-dev.txt --only=dev --without-hashes
 
 ## Install Python dependencies
 install:
 	# using requirements.txt to allow installation without Poetry
 	- make create_requirements  # update requirements.txt if Poetry is installed
-	pip install -r requirements.txt  # install pinned dependencies
+	pip install -r requirements.txt
+	pip install -r requirements-dev.txt
 	- jupyter contrib nbextension install --user
 	pip install -e .
 
 ## Delete all unwanted files
 clean:
-	find . -type f -name ".DS_Store" -exec rm -r -v {} +
 	find . -type f -name "*.py[co]" -exec rm -r -v {} +
+	find . -type f -name ".DS_Store" -exec rm -r -v {} +
+	find . -type f -name "*coverage*" -exec rm -r -v {} +
+
 	find . -type d -name "__pycache__" -exec rm -r -v {} +
-	find . -type d -name ".pytest_cache" -exec rm -r -v {} +
 	find . -type d -name ".ipynb_checkpoints" -exec rm -r -v {} +
+	find . -type d -name ".pytest_cache" -exec rm -r -v {} +
+	find . -type d -name ".mypy_cache" -exec rm -r -v {} +
+	find . -type d -name "htmlcov" -exec rm -r -v {} +
 
 #################################################################################
 # Self Documenting Commands                                                     #

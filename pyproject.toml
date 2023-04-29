@@ -1,41 +1,56 @@
 [tool.poetry]
 name = "custom-plotly-templates"
-version = "2.0.0"
+version = "2.0.1"
 description = "Custom templates and configurations for Plotly"
 
-license = "MIT"
+readme = "README.md"
 
+license = "MIT"
 authors = [
     "Ruslan Mukhametshin <rusmux21@gmail.com>"
 ]
-
 homepage = "https://github.com/rusmux/custom-plotly-templates"
-
 keywords = ["plotly", "template", "config"]
 
-readme = "README.md"
 packages = [{ include = "custom_plotly_templates" }]
+
 
 [tool.poetry.dependencies]
 python = ">=3.8, <3.11"
-plotly = ">=5.8.0"
+plotly = ">=5.14.1"
+
 
 [tool.poetry.group.dev.dependencies]
+poetry = "^1.4.2"
 wemake-python-styleguide = "^0.17.0"
-pytest = "^7.2.2"
+pytest = "^7.3.1"
 yesqa = "^1.4.0"
-pre-commit = "^3.1.1"
+mypy = "^1.2.0"
+pre-commit = "^3.2.2"
+
+jupyterlab = "^3.6.3"
+pandas = "^2.0.1"  # For plotly.express
+virtualenv = "<20.16.6"  # Poetry bug
+
 
 [tool.black]
-# for pre-commit hooks
 line-length = 120
 target-version = ["py38", "py39", "py310"]
 
 [tool.isort]
-# for pre-commit hooks
-profile = 'black'
+profile = "black"
 line_length = 120
-multi_line_output = 3
+multi_line_output = 0
+
+[tool.mypy]
+check_untyped_defs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+allow_redefinition = true
+strict_optional = false
+warn_unused_ignores = true
+disable_error_code = ["index", "assignment", "call-overload"]
+
 
 [build-system]
 requires = ["poetry-core"]
